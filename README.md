@@ -1,0 +1,1 @@
+# Typology of Data Visualizations
