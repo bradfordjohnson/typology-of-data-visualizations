@@ -11,11 +11,12 @@ font <- "Urbanist"
 background_color <- "white"
 plot_color <- "gray10"
 
-x <- rbinom(100, 12, .4)
+x <- rbinom(100, 12, .44)
 
 ggplot(, aes(x = x)) +
-  geom_boxplot(size = .5) +
-  geom_jitter(aes(y = 1)) +
+  geom_boxplot(size = .25) +
+  geom_jitter(size = .5, aes(y = 1)) +
+  scale_x_continuous(limits = c(0, 10), breaks = seq(0, 10, by = 1)) +
   theme_void() +
   theme(
     plot.background = element_rect(
@@ -37,12 +38,7 @@ ggplot(, aes(x = x)) +
     ),
     panel.grid.major.x = element_line(
       color = plot_color,
-      size = .2,
-      linetype = 3,
-    ),
-    panel.grid.minor.x = element_line(
-      color = plot_color,
-      size = .2,
+      size = .1,
       linetype = 3,
     ),
   )
