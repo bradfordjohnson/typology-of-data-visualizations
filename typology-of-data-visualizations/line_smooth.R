@@ -10,13 +10,14 @@ font_add_google("Urbanist", family = "Urbanist")
 font <- "Urbanist"
 background_color <- "white"
 plot_color <- "black"
+line_color <- "#30394F"
 
 x <- rnorm(100, 5, 2)
 y <- rnorm(100, 5, 1.5)
 
 data.frame(x = x, y = y) %>%
   ggplot(aes(x = x, y = y)) +
-  geom_point(size = .5) +
+  geom_smooth(color = line_color, fill = "gray70", linewidth = .5) +
   scale_y_continuous(limits = c(0, 12), breaks = seq(0, 12, by = 2)) +
   scale_x_continuous(limits = c(0, 12), breaks = seq(0, 12, by = 2)) +
   coord_cartesian(expand = FALSE) +
@@ -54,7 +55,7 @@ data.frame(x = x, y = y) %>%
   )
 
 ggsave(
-  "typology-of-data-visualizations/visuals/scatter.png",
+  "typology-of-data-visualizations/visuals/line_smooth.png",
   width = 4,
   height = 4,
   units = "in",
