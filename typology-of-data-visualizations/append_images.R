@@ -1,6 +1,8 @@
 library(here)
 library(magick)
 
+#TODO: make into a function
+
 bars <- list.files(
   here("typology-of-data-visualizations", "bar"),
   pattern = "png",
