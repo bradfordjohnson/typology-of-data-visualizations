@@ -45,7 +45,7 @@ ggplot(, aes(x = 1, y = y)) +
   )
 
 ggsave(
-  "typology-of-data-visualizations/distribution/violin.png",
+  "typology-of-data-visualizations/distribution/4_violin.png",
   width = 4,
   height = 4,
   units = "in",
