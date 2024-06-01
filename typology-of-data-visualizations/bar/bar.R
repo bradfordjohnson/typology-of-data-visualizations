@@ -12,11 +12,11 @@ background_color <- "white"
 plot_color <- "gray10"
 
 data.frame(
-  x = c("A", "B", "C", "D", "E"),
-  y = c(1, 2, 3, 4, 5)
+  x = c("A", "B", "C"),
+  y = c(1, 2, 3)
 ) %>%
   ggplot(aes(x = x, y = y)) +
-  geom_bar(stat = "identity", fill = plot_color) +
+  geom_bar(stat = "identity", fill = plot_color, width = .5) +
   scale_y_continuous(expand = expansion(mult = c(0, 0))) +
   theme_void() +
   theme(
@@ -52,7 +52,7 @@ data.frame(
   )
 
 ggsave(
-  "typology-of-data-visualizations/bar/bar.png",
+  "typology-of-data-visualizations/bar/1_bar.png",
   width = 4,
   height = 4,
   units = "in",
