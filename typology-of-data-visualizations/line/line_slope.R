@@ -76,7 +76,7 @@ data.frame(id, after, before) %>%
   )
 
 ggsave(
-  "typology-of-data-visualizations/line/line_slope.png",
+  "typology-of-data-visualizations/line/4_line_slope.png",
   width = 4,
   height = 4,
   units = "in",

@@ -73,7 +73,7 @@ data.frame(x = x, y = y, category = category) %>%
   )
 
 ggsave(
-  "typology-of-data-visualizations/line/line_grouped.png",
+  "typology-of-data-visualizations/line/2_line_grouped.png",
   width = 4,
   height = 4,
   units = "in",

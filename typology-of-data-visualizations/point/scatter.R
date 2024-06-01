@@ -54,7 +54,7 @@ data.frame(x = x, y = y) %>%
   )
 
 ggsave(
-  "typology-of-data-visualizations/scatter/scatter.png",
+  "typology-of-data-visualizations/point/1_scatter.png",
   width = 4,
   height = 4,
   units = "in",

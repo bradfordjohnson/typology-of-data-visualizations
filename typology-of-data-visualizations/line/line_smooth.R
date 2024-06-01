@@ -55,7 +55,7 @@ data.frame(x = x, y = y) %>%
   )
 
 ggsave(
-  "typology-of-data-visualizations/line/line_smooth.png",
+  "typology-of-data-visualizations/line/3_line_smooth.png",
   width = 4,
   height = 4,
   units = "in",

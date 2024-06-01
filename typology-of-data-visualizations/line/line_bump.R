@@ -83,7 +83,7 @@ data.frame(x = x, y = rank, category = category) %>%
   )
 
 ggsave(
-  "typology-of-data-visualizations/line/line_bump.png",
+  "typology-of-data-visualizations/line/5_line_bump.png",
   width = 4,
   height = 4,
   units = "in",
