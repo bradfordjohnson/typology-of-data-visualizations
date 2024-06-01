@@ -9,11 +9,15 @@ font_add_google("Urbanist", family = "Urbanist")
 
 font <- "Urbanist"
 background_color <- "white"
-plot_color <- "black"
+plot_color <- "gray10"
 
-data.frame(x = 1:5, y = 1:5) %>%
-  ggplot(aes(x = x, y = y)) +
-  geom_line(linewidth = .55) +
+x <- rnorm(1000, 5, 1)
+
+ggplot(, aes(x = x)) +
+  geom_density(color = plot_color) +
+  scale_y_continuous(limits = c(0, 0.5), breaks = seq(0, 0.5, by = .1)) +
+  scale_x_continuous(limits = c(0, 10), breaks = seq(0, 10, by = 2)) +
+  coord_cartesian(expand = FALSE) +
   theme_void() +
   theme(
     plot.background = element_rect(
@@ -42,13 +46,13 @@ data.frame(x = 1:5, y = 1:5) %>%
     ),
     panel.grid.major = element_line(
       color = plot_color,
-      size = .15,
+      size = .1,
       linetype = 3,
     ),
   )
 
 ggsave(
-  "typology-of-data-visualizations/visuals/line.png",
+  "typology-of-data-visualizations/distribution/density.png",
   width = 4,
   height = 4,
   units = "in",

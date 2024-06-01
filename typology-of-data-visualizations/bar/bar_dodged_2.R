@@ -67,7 +67,7 @@ data.frame(
   )
 
 ggsave(
-  "typology-of-data-visualizations/visuals/bar_dodged_2.png",
+  "typology-of-data-visualizations/bar/bar_dodged_2.png",
   width = 4,
   height = 4,
   units = "in",

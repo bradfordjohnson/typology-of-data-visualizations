@@ -3,6 +3,7 @@ library(dplyr)
 library(httpgd)
 library(sysfonts)
 library(showtext)
+library(ggbump)
 
 showtext_auto()
 font_add_google("Urbanist", family = "Urbanist")
@@ -10,25 +11,35 @@ font_add_google("Urbanist", family = "Urbanist")
 font <- "Urbanist"
 background_color <- "white"
 plot_color <- "black"
-category_colors <- c("#6ACEEB", "#30394F")
+category_colors <- c("#30394F", "#6ACEEB", "#E0B44E", "#A9336E")
 
-category <- c(rep("A", 24), rep("B", 24))
-x <- rep(1:24, 2)
-y <- c(rnorm(24, 5, .5), rnorm(24, 3, .5))
+category <- c(
+  "A", "A", "A", "A",
+  "B", "B", "B", "B",
+  "C", "C", "C", "C",
+  "D", "D", "D", "D"
+)
 
-data.frame(x = x, y = y, category = category) %>%
+x <- rep(2021:2024, 4)
+
+rank <- c(
+  1, 3, 2, 3,
+  2, 1, 1, 1,
+  3, 2, 4, 4,
+  4, 4, 3, 2
+)
+
+data.frame(x = x, y = rank, category = category) %>%
   ggplot(aes(x = x, y = y, color = category)) +
-  geom_line(linewidth = .4) +
+  geom_bump(size = .75) +
   scale_color_manual(values = category_colors) +
   scale_y_continuous(
-    expand = expansion(mult = c(0, 0)),
-    limits = c(0, 8),
-    breaks = seq(0, 8, by = 2)
+    limits = c(1, 4),
+    breaks = seq(1, 4, by = 1)
   ) +
   scale_x_continuous(
-    expand = expansion(mult = c(0, 0)),
-    limits = c(0, 24),
-    breaks = seq(0, 24, by = 4)
+    limits = c(2021, 2024),
+    breaks = seq(2021, 2024, by = 1)
   ) +
   theme_void() +
   theme(
@@ -41,7 +52,6 @@ data.frame(x = x, y = y, category = category) %>%
       color = background_color
     ),
     plot.margin = margin(1, 1, 1, 1, "cm"),
-    axis.line = element_line(size = .5),
     axis.text.x = element_text(
       size = 16,
       family = font,
@@ -65,15 +75,15 @@ data.frame(x = x, y = y, category = category) %>%
     ),
     legend.position = "top",
     legend.direction = "horizontal",
-    panel.grid.major = element_line(
+    panel.grid.major.x = element_line(
       color = plot_color,
       size = .15,
-      linetype = 3,
+      linetype = 3
     ),
   )
 
 ggsave(
-  "typology-of-data-visualizations/visuals/line_grouped.png",
+  "typology-of-data-visualizations/line/line_bump.png",
   width = 4,
   height = 4,
   units = "in",

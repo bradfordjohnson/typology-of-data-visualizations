@@ -11,13 +11,13 @@ font <- "Urbanist"
 background_color <- "white"
 plot_color <- "gray10"
 
-y <- rnorm(50, 10, 4)
+x <- rnorm(1000, 5, 1)
 
-
-ggplot(, aes(x = 1, y = y)) +
-  geom_violin(size = .25) +
-  geom_jitter(size = .5, aes(x = 2)) +
-  scale_y_continuous(limits = c(0, 20), breaks = seq(0, 20, by = 2)) +
+ggplot(, aes(x = x)) +
+  geom_histogram(binwidth = .5, color = plot_color) +
+  scale_y_continuous(limits = c(0, 250), breaks = seq(0, 250, by = 50)) +
+  scale_x_continuous(limits = c(0, 10), breaks = seq(0, 10, by = 1)) +
+  coord_cartesian(expand = FALSE) +
   theme_void() +
   theme(
     plot.background = element_rect(
@@ -29,7 +29,14 @@ ggplot(, aes(x = 1, y = y)) +
       color = background_color
     ),
     plot.margin = margin(1, 1, 1, 1, "cm"),
-    axis.line.y = element_line(size = .5),
+    axis.line = element_line(size = .5),
+    axis.text.x = element_text(
+      size = 16,
+      family = font,
+      face = "bold",
+      color = plot_color,
+      margin = margin(2, 0, 0, 0, "mm")
+    ),
     axis.text.y = element_text(
       size = 16,
       family = font,
@@ -37,7 +44,7 @@ ggplot(, aes(x = 1, y = y)) +
       color = plot_color,
       margin = margin(0, 2, 0, 0, "mm")
     ),
-    panel.grid.major.y = element_line(
+    panel.grid.major = element_line(
       color = plot_color,
       size = .1,
       linetype = 3,
@@ -45,7 +52,7 @@ ggplot(, aes(x = 1, y = y)) +
   )
 
 ggsave(
-  "typology-of-data-visualizations/visuals/violin.png",
+  "typology-of-data-visualizations/distribution/histogram.png",
   width = 4,
   height = 4,
   units = "in",

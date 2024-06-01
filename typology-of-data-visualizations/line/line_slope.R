@@ -1,5 +1,6 @@
 library(ggplot2)
 library(dplyr)
+library(tidyr)
 library(httpgd)
 library(sysfonts)
 library(showtext)
@@ -9,15 +10,29 @@ font_add_google("Urbanist", family = "Urbanist")
 
 font <- "Urbanist"
 background_color <- "white"
-plot_color <- "gray10"
+plot_color <- "black"
+category_colors <- c("#6ACEEB", "#30394F", "#E0B44E", "#A9336E")
 
-x <- rnorm(1000, 5, 1)
+id <- c("A", "B", "C", "D")
+before <- c(2, 3, 4, 1.5)
+after <- c(3.5, 4.5, 3, 1.75)
 
-ggplot(, aes(x = x)) +
-  geom_histogram(binwidth = .5, color = plot_color) +
-  scale_y_continuous(limits = c(0, 250), breaks = seq(0, 250, by = 50)) +
-  scale_x_continuous(limits = c(0, 10), breaks = seq(0, 10, by = 1)) +
-  coord_cartesian(expand = FALSE) +
+data.frame(id, after, before) %>%
+  pivot_longer(
+    cols = c("after", "before"),
+    names_to = "time",
+    values_to = "value"
+  ) %>%
+  ggplot(aes(x = time, y = value, group = id, color = factor(id))) +
+  geom_line(linewidth = .4) +
+  geom_point() +
+  scale_y_continuous(
+    expand = expansion(mult = c(0, 0)),
+    limits = c(0, 5),
+    breaks = seq(0, 5, by = 1)
+  ) +
+  scale_x_discrete(limits = c("before", "after")) +
+  scale_color_manual(values = category_colors) +
   theme_void() +
   theme(
     plot.background = element_rect(
@@ -44,15 +59,24 @@ ggplot(, aes(x = x)) +
       color = plot_color,
       margin = margin(0, 2, 0, 0, "mm")
     ),
+    legend.title = element_blank(),
+    legend.text = element_text(
+      size = 16,
+      family = font,
+      face = "bold",
+      color = plot_color
+    ),
+    legend.position = "top",
+    legend.direction = "horizontal",
     panel.grid.major = element_line(
       color = plot_color,
-      size = .1,
+      size = .15,
       linetype = 3,
     ),
   )
 
 ggsave(
-  "typology-of-data-visualizations/visuals/histogram.png",
+  "typology-of-data-visualizations/line/line_slope.png",
   width = 4,
   height = 4,
   units = "in",

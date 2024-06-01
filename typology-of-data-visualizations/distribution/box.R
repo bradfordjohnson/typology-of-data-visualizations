@@ -11,14 +11,12 @@ font <- "Urbanist"
 background_color <- "white"
 plot_color <- "gray10"
 
-data.frame(
-  x = c("A", "B", "C", "D", "E"),
-  y = c(1, 2, 3, 4, 5)
-) %>%
-  ggplot(aes(x = x, y = y)) +
-  geom_bar(stat = "identity", fill = plot_color) +
-  scale_y_continuous(expand = expansion(mult = c(0, 0))) +
-  coord_flip() +
+x <- rbinom(100, 12, .44)
+
+ggplot(, aes(x = x)) +
+  geom_boxplot(size = .25) +
+  geom_jitter(size = .5, aes(y = 1)) +
+  scale_x_continuous(limits = c(0, 10), breaks = seq(0, 10, by = 1)) +
   theme_void() +
   theme(
     plot.background = element_rect(
@@ -30,7 +28,7 @@ data.frame(
       color = background_color
     ),
     plot.margin = margin(1, 1, 1, 1, "cm"),
-    axis.line = element_line(size = .5),
+    axis.line.x = element_line(size = .5),
     axis.text.x = element_text(
       size = 16,
       family = font,
@@ -38,22 +36,15 @@ data.frame(
       color = plot_color,
       margin = margin(2, 0, 0, 0, "mm")
     ),
-    axis.text.y = element_text(
-      size = 16,
-      family = font,
-      face = "bold",
-      color = plot_color,
-      margin = margin(0, 2, 0, 0, "mm")
-    ),
     panel.grid.major.x = element_line(
       color = plot_color,
-      size = .10,
+      size = .1,
       linetype = 3,
     ),
   )
 
 ggsave(
-  "typology-of-data-visualizations/visuals/bar_horizontal.png",
+  "typology-of-data-visualizations/distribution/box.png",
   width = 4,
   height = 4,
   units = "in",

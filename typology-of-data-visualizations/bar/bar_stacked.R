@@ -9,18 +9,23 @@ font_add_google("Urbanist", family = "Urbanist")
 
 font <- "Urbanist"
 background_color <- "white"
-plot_color <- "black"
-line_color <- "#30394F"
+plot_color <- "gray10"
+category_colors <- c("#6ACEEB", "#30394F")
 
-x <- rnorm(100, 5, 2)
-y <- rnorm(100, 5, 1.5)
-
-data.frame(x = x, y = y) %>%
-  ggplot(aes(x = x, y = y)) +
-  geom_smooth(color = line_color, fill = "gray70", linewidth = .5) +
-  scale_y_continuous(limits = c(0, 12), breaks = seq(0, 12, by = 2)) +
-  scale_x_continuous(limits = c(0, 12), breaks = seq(0, 12, by = 2)) +
-  coord_cartesian(expand = FALSE) +
+data.frame(
+  x = c("A", "A", "B", "B", "C", "C"),
+  category = c("a", "b", "a", "b", "a", "b"),
+  y = c(1, 2, 3, 4, 5, 6)
+) %>%
+  ggplot(aes(x = x, y = y, fill = category, color = category)) +
+  geom_bar(stat = "identity", width = .5) +
+  scale_y_continuous(
+    expand = expansion(mult = c(0, 0)),
+    limits = c(0, 12),
+    breaks = seq(0, 12, by = 2)
+  ) +
+  scale_fill_manual(values = category_colors) +
+  scale_color_manual(values = category_colors) +
   theme_void() +
   theme(
     plot.background = element_rect(
@@ -47,15 +52,22 @@ data.frame(x = x, y = y) %>%
       color = plot_color,
       margin = margin(0, 2, 0, 0, "mm")
     ),
-    panel.grid.major = element_line(
+    legend.title = element_blank(),
+    legend.text = element_text(
+      size = 16,
+      family = font,
+      face = "bold",
+      color = plot_color
+    ),
+    panel.grid.major.y = element_line(
       color = plot_color,
-      size = .09,
+      size = .10,
       linetype = 3,
     ),
   )
 
 ggsave(
-  "typology-of-data-visualizations/visuals/line_smooth.png",
+  "typology-of-data-visualizations/bar/bar_stacked.png",
   width = 4,
   height = 4,
   units = "in",
