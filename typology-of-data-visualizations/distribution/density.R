@@ -10,11 +10,12 @@ font_add_google("Urbanist", family = "Urbanist")
 font <- "Urbanist"
 background_color <- "white"
 plot_color <- "gray10"
+plot_fill <- "gray70"
 
 x <- rnorm(1000, 5, 1)
 
 ggplot(, aes(x = x)) +
-  geom_density(color = plot_color) +
+  geom_density(color = plot_color, fill = plot_fill) +
   scale_y_continuous(limits = c(0, 0.5), breaks = seq(0, 0.5, by = .1)) +
   scale_x_continuous(limits = c(0, 10), breaks = seq(0, 10, by = 2)) +
   coord_cartesian(expand = FALSE) +

@@ -14,8 +14,8 @@ plot_color <- "gray10"
 x <- rbinom(100, 12, .44)
 
 ggplot(, aes(x = x)) +
-  geom_boxplot(size = .25) +
-  geom_jitter(size = .5, aes(y = 1)) +
+  geom_boxplot(size = .4, width = 0.7) +
+  ylim(-1, 1) +
   scale_x_continuous(limits = c(0, 10), breaks = seq(0, 10, by = 1)) +
   theme_void() +
   theme(

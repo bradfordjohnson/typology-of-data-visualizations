@@ -13,10 +13,9 @@ plot_color <- "gray10"
 
 y <- rnorm(50, 10, 4)
 
-
-ggplot(, aes(x = 1, y = y)) +
-  geom_violin(size = .25) +
-  geom_jitter(size = .5, aes(x = 2)) +
+ggplot(, aes(x = 0, y = y)) +
+  geom_violin(size = .4, width = .7) +
+  xlim(-1, 1) +
   scale_y_continuous(limits = c(0, 20), breaks = seq(0, 20, by = 2)) +
   theme_void() +
   theme(
