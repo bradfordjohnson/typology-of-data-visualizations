@@ -23,7 +23,7 @@ create_visualization_typology <- function(directory_list) {
 
     combined_image <- magick::image_append(
       image = magick::image_join(directory_images),
-      stack = FALSE
+      stack = TRUE
     )
 
     combined_image_list[[length(combined_image_list) + 1]] <- combined_image
@@ -31,7 +31,7 @@ create_visualization_typology <- function(directory_list) {
 
   final_image <- magick::image_append(
     image = magick::image_join(combined_image_list),
-    stack = TRUE
+    stack = FALSE
   )
   magick::image_write(
     final_image,
@@ -40,4 +40,4 @@ create_visualization_typology <- function(directory_list) {
   )
 }
 
-create_visualization_typology(list("bar", "line", "distribution", "point", "area"))
+create_visualization_typology(list("line", "distribution", "bar", "point", "area"))

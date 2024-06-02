@@ -48,7 +48,7 @@ ggplot(, aes(x = x)) +
   )
 
 ggsave(
-  "typology-of-data-visualizations/distribution/3_density.png",
+  "typology-of-data-visualizations/distribution/4_density.png",
   width = 4,
   height = 4,
   units = "in",
