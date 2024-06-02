@@ -59,11 +59,6 @@ data.frame(
       face = "bold",
       color = plot_color
     ),
-    panel.grid.major.y = element_line(
-      color = plot_color,
-      size = .10,
-      linetype = 3,
-    ),
   )
 
 ggsave(
@@ -120,11 +115,6 @@ data.frame(
       family = font,
       face = "bold",
       color = plot_color
-    ),
-    panel.grid.major.y = element_line(
-      color = plot_color,
-      size = .10,
-      linetype = 3,
     ),
   )
 

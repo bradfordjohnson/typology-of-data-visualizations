@@ -36,11 +36,6 @@ ggplot(, aes(x = x)) +
       color = plot_color,
       margin = margin(2, 0, 0, 0, "mm")
     ),
-    panel.grid.major.x = element_line(
-      color = plot_color,
-      size = .1,
-      linetype = 3,
-    ),
   )
 
 ggsave(

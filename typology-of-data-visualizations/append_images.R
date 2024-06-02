@@ -40,4 +40,4 @@ create_visualization_typology <- function(directory_list) {
   )
 }
 
-create_visualization_typology(list("bar", "line", "distribution", "point"))
+create_visualization_typology(list("bar", "line", "distribution", "point", "area"))

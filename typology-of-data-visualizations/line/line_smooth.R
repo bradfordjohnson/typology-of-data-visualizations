@@ -47,11 +47,6 @@ data.frame(x = x, y = y) %>%
       color = plot_color,
       margin = margin(0, 2, 0, 0, "mm")
     ),
-    panel.grid.major = element_line(
-      color = plot_color,
-      size = .09,
-      linetype = 3,
-    ),
   )
 
 ggsave(

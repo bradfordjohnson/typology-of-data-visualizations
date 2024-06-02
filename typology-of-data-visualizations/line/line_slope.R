@@ -68,11 +68,6 @@ data.frame(id, after, before) %>%
     ),
     legend.position = "top",
     legend.direction = "horizontal",
-    panel.grid.major = element_line(
-      color = plot_color,
-      size = .15,
-      linetype = 3,
-    ),
   )
 
 ggsave(

@@ -10,22 +10,23 @@ font_add_google("Urbanist", family = "Urbanist")
 font <- "Urbanist"
 background_color <- "white"
 plot_color <- "gray10"
-category_colors <- c("#6ACEEB", "#30394F")
 
-data.frame(
-  x = c("A", "A", "B", "B", "C", "C"),
-  category = c("a", "b", "a", "b", "a", "b"),
-  y = c(1, 2, 3, 4, 5, 6)
-) %>%
-  ggplot(aes(x = x, y = y, fill = category, color = category)) +
-  geom_bar(stat = "identity", width = .5) +
+y <- rbinom(17, 20, .7)
+x <- 0:16
+
+data.frame(x = x, y = y) %>%
+  ggplot(aes(x = x, y = y)) +
+  geom_area(fill = plot_color, color = plot_color, alpha = .5) +
   scale_y_continuous(
     expand = expansion(mult = c(0, 0)),
-    limits = c(0, 12),
-    breaks = seq(0, 12, by = 2)
+    limits = c(0, 22),
+    breaks = seq(0, 22, by = 2)
   ) +
-  scale_fill_manual(values = category_colors) +
-  scale_color_manual(values = category_colors) +
+  scale_x_continuous(
+    expand = expansion(mult = c(0, 0)),
+    limits = c(0, 16),
+    breaks = seq(0, 16, by = 2)
+  ) +
   theme_void() +
   theme(
     plot.background = element_rect(
@@ -52,17 +53,10 @@ data.frame(
       color = plot_color,
       margin = margin(0, 2, 0, 0, "mm")
     ),
-    legend.title = element_blank(),
-    legend.text = element_text(
-      size = 16,
-      family = font,
-      face = "bold",
-      color = plot_color
-    ),
   )
 
 ggsave(
-  "typology-of-data-visualizations/bar/2_bar_stacked.png",
+  "typology-of-data-visualizations/area/1_area.png",
   width = 4,
   height = 4,
   units = "in",

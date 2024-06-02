@@ -75,11 +75,6 @@ data.frame(x = x, y = rank, category = category) %>%
     ),
     legend.position = "top",
     legend.direction = "horizontal",
-    panel.grid.major.x = element_line(
-      color = plot_color,
-      size = .15,
-      linetype = 3
-    ),
   )
 
 ggsave(

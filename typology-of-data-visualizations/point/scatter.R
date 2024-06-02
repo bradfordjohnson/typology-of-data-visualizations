@@ -16,7 +16,7 @@ y <- rnorm(100, 5, 1.5)
 
 data.frame(x = x, y = y) %>%
   ggplot(aes(x = x, y = y)) +
-  geom_point(size = .5) +
+  geom_point(size = .75) +
   scale_y_continuous(limits = c(0, 12), breaks = seq(0, 12, by = 2)) +
   scale_x_continuous(limits = c(0, 12), breaks = seq(0, 12, by = 2)) +
   coord_cartesian(expand = FALSE) +
@@ -45,11 +45,6 @@ data.frame(x = x, y = y) %>%
       face = "bold",
       color = plot_color,
       margin = margin(0, 2, 0, 0, "mm")
-    ),
-    panel.grid.major = element_line(
-      color = plot_color,
-      size = .09,
-      linetype = 3,
     ),
   )
 

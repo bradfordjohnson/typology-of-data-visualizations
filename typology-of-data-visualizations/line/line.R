@@ -50,11 +50,6 @@ data.frame(x = 1:5, y = 1:5) %>%
       color = plot_color,
       margin = margin(0, 2, 0, 0, "mm")
     ),
-    panel.grid.major = element_line(
-      color = plot_color,
-      size = .15,
-      linetype = 3,
-    ),
   )
 
 ggsave(
