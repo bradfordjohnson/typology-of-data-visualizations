@@ -1,46 +1,43 @@
 library(here)
 library(magick)
 
-#TODO: make into a function
+create_visualization_typology <- function(directory_list) {
 
-bars <- list.files(
-  here("typology-of-data-visualizations", "bar"),
-  pattern = "png",
-  recursive = TRUE,
-  full.names = TRUE
-)
+  if (!is.list(directory_list)) {
+    stop("directory_list must be a list")
+  }
 
-lines <- list.files(
-  here("typology-of-data-visualizations", "line"),
-  pattern = "png",
-  recursive = TRUE,
-  full.names = TRUE
-)
+  combined_image_list <- list()
 
-dist <- list.files(
-  here("typology-of-data-visualizations", "distribution"),
-  pattern = "png",
-  recursive = TRUE,
-  full.names = TRUE
-)
+  for (directory in directory_list) {
+    if (!dir.exists(file.path("typology-of-data-visualizations", directory))) {
+      stop("Directory does not exist")
+    }
+    image_file_list <- list.files(
+      file.path("typology-of-data-visualizations", directory),
+      pattern = "png",
+      recursive = TRUE,
+      full.names = TRUE
+    )
+    directory_images <- lapply(image_file_list, magick::image_read)
 
-point <- list.files(
-  here("typology-of-data-visualizations", "point"),
-  pattern = "png",
-  recursive = TRUE,
-  full.names = TRUE
-)
+    combined_image <- magick::image_append(
+      image = magick::image_join(directory_images),
+      stack = FALSE
+    )
 
-bars_img <- image_read(bars)
-lines_img <- image_read(lines)
-dist_img <- image_read(dist)
-point_img <- image_read(point)
+    combined_image_list[[length(combined_image_list) + 1]] <- combined_image
+  }
 
-img1 <- image_append(bars_img, stack = FALSE)
-img2 <- image_append(lines_img, stack = FALSE)
-img3 <- image_append(dist_img, stack = FALSE)
-img4 <- image_append(point_img, stack = FALSE)
+  final_image <- magick::image_append(
+    image = magick::image_join(combined_image_list),
+    stack = TRUE
+  )
+  magick::image_write(
+    final_image,
+    path = file.path("typology-of-data-visualizations", "r_graph_typology.png"),
+    format = "png"
+  )
+}
 
-appended_image <- image_append(c(img1, img2, img3, img4), stack = TRUE)
-
-image_write(appended_image, path = here("typology-of-data-visualizations", "test.png"), format = "png")
+create_visualization_typology(list("bar", "line", "distribution", "point"))
