@@ -9,27 +9,42 @@ font_add_google("Urbanist", family = "Urbanist")
 
 font <- "Urbanist"
 background_color <- "white"
-category_colors <- c("#30394F", "#6ACEEB")
+plot_color <- "black"
+category_colors <- c("#6ACEEB", "#30394F", "#E0B44E", "#A9336E")
 
-y <- c(rep(rbinom(17, 10, .88), 2))
-x <- c(rep(0:16, 2))
-category <- rep(c("a", "b"), 17)
+x <- runif(80, 0, 12)
 
-data.frame(x = x, y = y, category) %>%
-  ggplot(aes(x = x, y = y)) +
-  geom_area(alpha = .5, aes(color = category, fill = category)) +
-  scale_y_continuous(
-    expand = expansion(mult = c(0, 0)),
-    limits = c(0, 22),
-    breaks = seq(0, 22, by = 2)
+y <- c(
+  runif(20, 3, 6),
+  runif(20, 5, 12),
+  runif(20, 0, 3),
+  runif(20, 3, 9)
+)
+
+category <- c(
+  rep("a", 20),
+  rep("b", 20),
+  rep("c", 20),
+  rep("d", 20)
+)
+
+data.frame(x = x, y = y, category = category) %>%
+  ggplot(
+    aes(
+      x = x,
+      y = y,
+      size = category,
+      color = category,
+      fill = category
+    )
   ) +
-  scale_x_continuous(
-    expand = expansion(mult = c(0, 0)),
-    limits = c(0, 16),
-    breaks = seq(0, 16, by = 2)
-  ) +
-  scale_color_manual(values = category_colors) +
+  geom_point(alpha = 0.5) +
+  scale_size_manual(values = c(2, 3, 4, 5)) +
+  scale_y_continuous(limits = c(0, 12), breaks = seq(0, 12, by = 2)) +
+  scale_x_continuous(limits = c(0, 12), breaks = seq(0, 12, by = 2)) +
   scale_fill_manual(values = category_colors) +
+  scale_color_manual(values = category_colors) +
+  coord_cartesian(expand = FALSE) +
   theme_void() +
   theme(
     plot.background = element_rect(
@@ -66,7 +81,7 @@ data.frame(x = x, y = y, category) %>%
   )
 
 ggsave(
-  "typology-of-data-visualizations/area/2_area_stacked.png",
+  "typology-of-data-visualizations/point/2_bubble.png",
   width = 4,
   height = 4,
   units = "in",

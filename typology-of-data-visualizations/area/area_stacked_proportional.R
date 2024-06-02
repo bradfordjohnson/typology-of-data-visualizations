@@ -3,25 +3,30 @@ library(dplyr)
 library(httpgd)
 library(sysfonts)
 library(showtext)
+library(scales)
 
 showtext_auto()
 font_add_google("Urbanist", family = "Urbanist")
 
 font <- "Urbanist"
 background_color <- "white"
-category_colors <- c("#30394F", "#6ACEEB")
+category_colors <- c("#30394F", "#6ACEEB", "#E0B44E", "#A9336E")
 
-y <- c(rep(rbinom(17, 10, .88), 2))
-x <- c(rep(0:16, 2))
-category <- rep(c("a", "b"), 17)
+y <- runif(68, 10, 100)
+x <- c(rep(0:16, 4))
+category <- rep(c("a", "b", "c", "d"), 17)
 
-data.frame(x = x, y = y, category) %>%
-  ggplot(aes(x = x, y = y)) +
+data.frame(x = x, y = y, category = category) %>%
+  group_by(x, category) %>%
+  summarise(n = sum(y)) %>%
+  mutate(percentage = n / sum(n)) %>%
+  ggplot(aes(x = x, y = percentage)) +
   geom_area(alpha = .5, aes(color = category, fill = category)) +
   scale_y_continuous(
     expand = expansion(mult = c(0, 0)),
-    limits = c(0, 22),
-    breaks = seq(0, 22, by = 2)
+    limits = c(0, 1),
+    breaks = seq(0, 1, by = .5),
+    labels = percent_format()
   ) +
   scale_x_continuous(
     expand = expansion(mult = c(0, 0)),
@@ -66,7 +71,7 @@ data.frame(x = x, y = y, category) %>%
   )
 
 ggsave(
-  "typology-of-data-visualizations/area/2_area_stacked.png",
+  "typology-of-data-visualizations/area/3_area_stacked_proportional.png",
   width = 4,
   height = 4,
   units = "in",
